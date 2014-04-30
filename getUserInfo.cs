@@ -6,7 +6,7 @@ using System.Text;
 using Rally.RestApi;
 using Rally.RestApi.Response;
 
-namespace getUserInfo
+namespace aRESTgetUser
 {
     class Program
     {
@@ -14,39 +14,43 @@ namespace getUserInfo
         {
             //Initialize the REST API
             RallyRestApi restApi;
-            restApi = new RallyRestApi("admin@co.com", "topsecret", "https://rally1.rallydev.com", "v2.0");
+           restApi = new RallyRestApi("admin@co.com", "topsecret", "https://rally1.rallydev.com", "v2.0");
 
             //Set our Workspace and Project scopings
             String workspaceRef = "/workspace/1111"; //use valid OID of your workspace
             String projectRef = "/project/2222";     //use valid OID of your project
             bool projectScopingUp = false;
             bool projectScopingDown = true;
-
             Request userRequest = new Request("User");
 
             userRequest.Workspace = workspaceRef;
             userRequest.Project = projectRef;
             userRequest.ProjectScopeUp = projectScopingUp;
             userRequest.ProjectScopeDown = projectScopingDown;
-
-            userRequest.Fetch = new List<string>()
+		
+            /*
+                userRequest.Fetch = new List<string>()
                 {
                    "Role",
-		    "CostCenter",
+		"CostCenter",
                    "LastLoginDate",
                    "OfficeLocation",
                    "CreationDate"
-                };
+                };*/
 
             userRequest.Query = new Query("UserName", Query.Operator.Equals, "nick@wsapi.com");
             
             QueryResult userResults = restApi.Query(userRequest);
+            String userRef = userResults.Results.First()._ref;
+            DynamicJsonObject user = restApi.GetByReference(userRef, "Name", "Role", "CostCenter", "LastLoginDate", "OfficeLocation", "CreationDate");
+            String role = user["Role"];
+            String costCenter = user["CostCenter"];
+            String lastLoginDate = user["LastLoginDate"];
+            String officeLocation = user["OfficeLocation"];
+            String creationDate = user["CreationDate"];
 
-            foreach (var u in userResults.Results)
-            {
-                Console.WriteLine("----------");
-                Console.WriteLine("Role: " + u["Role"] + " CostCenter: " + u["CostCenter"] + " LastLoginDate: " + u["LastLoginDate"] + " OfficeLocation: " + u["OfficeLocation"] + " CreationDate: " + u["CreationDate"]);
-            }
+            Console.WriteLine("Role: " + role + " CostCenter: " + costCenter + " LastLoginDate: " + lastLoginDate + " OfficeLocation: " + officeLocation + " CreationDate: " + creationDate);
+
         }
     }
 }
