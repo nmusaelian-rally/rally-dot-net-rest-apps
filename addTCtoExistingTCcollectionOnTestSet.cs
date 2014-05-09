@@ -13,7 +13,7 @@ namespace addTCtoTS
         static void Main(string[] args)
         {
             RallyRestApi restApi;
-            restApi = new RallyRestApi("user@co.com", "Rally2013!", "https://rally1.rallydev.com", "v2.0");
+            restApi = new RallyRestApi("user@co.com", "secret", "https://rally1.rallydev.com", "v2.0");
 
             String projectRef = "/project/222"; 
             Request testSetRequest = new Request("TestSet");
