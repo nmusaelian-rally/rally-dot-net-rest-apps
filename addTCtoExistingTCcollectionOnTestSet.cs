@@ -15,7 +15,7 @@ namespace addTCtoTS
             RallyRestApi restApi;
             restApi = new RallyRestApi("user@co.com", "Rally2013!", "https://rally1.rallydev.com", "v2.0");
 
-            String projectRef = "/project/12352608219"; 
+            String projectRef = "/project/222"; 
             Request testSetRequest = new Request("TestSet");
             testSetRequest.Project = projectRef;
             testSetRequest.Fetch = new List<string>()
@@ -51,14 +51,10 @@ namespace addTCtoTS
                 }
             }
             
-            Console.WriteLine(testCasesList.Count);
-            foreach (var e in testCasesList){
-                 Console.WriteLine(e);
-
-            }
+	 Console.WriteLine("count of elements in the array before adding a new tc:" + testCasesList.Count);
 
           DynamicJsonObject anotherTC = new DynamicJsonObject();
-          anotherTC["_ref"] = "/testcase/18889217079";             //any existing test to add to the collection
+          anotherTC["_ref"] = "/testcase/123456789";             //any existing test to add to the collection
 
            testCasesList.Add(anotherTC);
 
