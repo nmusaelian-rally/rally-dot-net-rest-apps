@@ -5,7 +5,7 @@ using System.Text;
 using Rally.RestApi;
 using Rally.RestApi.Response;
 
-namespace createUpdateDefect
+namespace aRESTcreateDefect
 {
     class Program
     {
@@ -14,9 +14,11 @@ namespace createUpdateDefect
             RallyRestApi restApi = new RallyRestApi("user@co.com", "secret", "https://rally1.rallydev.com", "v2.0");
             String workspaceRef = "/workspace/11111"; //use valid workspace OID in your Rally
             String projectRef = "/project/12345";         //use valid project OID in your Rally
+            String userRef = "/user/777";
             DynamicJsonObject d = new DynamicJsonObject();
             d["Name"] = "some bug";
             d["Project"] = projectRef;
+            d["Owner"] = userRef;
 
             CreateResult createResult = restApi.Create(workspaceRef, "Defect", d);
             DynamicJsonObject defect = restApi.GetByReference(createResult.Reference, "FormattedID");
