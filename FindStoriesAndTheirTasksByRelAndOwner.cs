@@ -12,6 +12,8 @@ namespace FindStoriesAndTheirTasksByRelAndOwner
     {
         static void Main(string[] args)
         {
+            int storyCount = 0;
+            int taskCount = 0;
             RallyRestApi restApi;
             restApi = new RallyRestApi("apiuser@co.com", "secret", "https://rally1.rallydev.com", "v2.0");
 
@@ -26,13 +28,16 @@ namespace FindStoriesAndTheirTasksByRelAndOwner
             foreach (var s in queryResults.Results)
             {
                 Console.WriteLine("FormattedID: " + s["FormattedID"] + " Name: " + s["Name"] + " Release: " + s["Release"]._refObjectName + " Project: " + s["Project"]._refObjectName + " Owner: " + s["Owner"]._refObjectName);
+                storyCount++;
                 Request tasksRequest = new Request(s["Tasks"]);
                 QueryResult queryTaskResult = restApi.Query(tasksRequest);
-                foreach (var c in queryTaskResult.Results)
+                foreach (var t in queryTaskResult.Results)
                 {
-                    Console.WriteLine("FormattedID: " + c["FormattedID"] + " Name: " + c["Name"]);
+                    Console.WriteLine("Task: " + t["FormattedID"] + " State: " + t["State"]);
+                    taskCount++;
                 }
             }
+            Console.WriteLine(storyCount + " stories, "+  taskCount + " tasks ");
         }
     }
 }
