@@ -31,14 +31,15 @@ namespace aRESTgetStoriesLastUpdated
                     "FormattedID"
                 };
 
-            QueryResult queryDefectResults = restApi.Query(storyRequest);
+            QueryResult queryResults = restApi.Query(storyRequest);
             int count = 0;
-            foreach (var d in queryDefectResults.Results)
+            foreach (var d in queryResults.Results)
             {
                 count++;
                 Console.WriteLine(count + ". FormattedID: " + d["FormattedID"] + " Name: " + d["Name"]);
             }
-            Console.WriteLine("Found " + queryDefectResults.TotalResultCount);
+            Console.WriteLine("Found " + queryResults.TotalResultCount);
         }
     }
 }
+
