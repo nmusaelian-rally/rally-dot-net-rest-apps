@@ -5,21 +5,13 @@ Revision Examples
 These C# examples are based on [Rally Rest Toolkit for .NET](https://github.com/RallyTools/RallyRestToolkitFor.NET)
 and tested with 2.0.1 dll
 
-
-Make sure to change Target Framework from default .NET Framework 4 Client Profile 
-
-[](target1.bmp)
-
-
-to .NET Framework 4. The former is a subset of the latter.
-
-[](target2.bmp)
-
-Here is a screenshot showing the console output from Get Revisions By Creation Date One Month Back:
-![](pic0.png)
+Make sure to change Target Framework from default .NET Framework 4 Client Profile as described in the toolkit's User Guide
 
 Here is a screenshot showing the console output from Get Revisions By Creation Date Minutes Ago:
 ![](pic1.png)
+
+Here is a screenshot showing the console output from Get Revisions Of Stories Last Updated In Last Two Days:
+![](pic2.png)
 
 ## License
 These code examples are  available AS IS, for illustration purposes only. They are NOT supported by Rally.
