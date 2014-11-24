@@ -43,7 +43,7 @@ namespace getChangesetsOfStories
                         {
                             author = c["Author"]._refObjectName;
                         }
-                        Console.WriteLine("changeset: Author:" + author + " SCMRepository: " + c["SCMRepository"]._refObjectName);
+                        Console.WriteLine("changeset: Author:" + author + " SCMRepository: " + c["SCMRepository"]._refObjectName + " Message: " + c["Message"]);
                         Request changesRequest = new Request(c["Changes"]);
                         QueryResult changesResult = restApi.Query(changesRequest);
                         foreach (var ch in changesResult.Results)

@@ -8,6 +8,8 @@ and tested with 2.0.1 dll
 Make sure to change Target Framework from default .NET Framework 4 Client Profile as described in the toolkit's User Guide
 
 A screenshot showing the console output:
+
+
 ![](pic.png)
 
 
