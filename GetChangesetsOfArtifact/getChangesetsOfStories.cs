@@ -13,8 +13,8 @@ namespace getChangesetsOfStories
         static void Main(string[] args)
         {
             RallyRestApi restApi;
-            restApi = new RallyRestApi("user@co.com", "secret", "https://rally1.rallydev.com", "v2.0");
-
+            //restApi = new RallyRestApi("user@co.com", "secret", "https://rally1.rallydev.com", "v2.0");
+            restApi = new RallyRestApi("_abc123", "https://rally1.rallydev.com"); //either username/passowrd or API Key authetnication is valid
             String workspaceRef = "/workspace/12352608129";     //replace this OID with an OID of your workspace
 
             DateTime today = DateTime.Today;
