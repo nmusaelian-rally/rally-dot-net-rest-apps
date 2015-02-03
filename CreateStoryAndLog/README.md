@@ -9,11 +9,11 @@ Make sure to change Target Framework from default .NET Framework 4 Client Profil
 
 The purpose is to log the output of this console application to a log file. Errors will also be recorded. For example, if a code references a Rally attribute that does not exist (misspelled as StateX) the excepton is recorded:
 
-![](pic1.png)
+![](pic2.png)
 
 The executable file is scheduled to run using Windows Task Scheduler:
 
-![](pic2.png)
+![](pic1.png)
 
 ## License
 These code examples are  available AS IS, for illustration purposes only. They are NOT supported by Rally.
