@@ -1,11 +1,11 @@
 using System;
-//using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rally.RestApi;
 using Rally.RestApi.Response;
+using System.Threading;
 
 namespace ArtifactNotificationConsoleApp
 {
@@ -13,45 +13,45 @@ namespace ArtifactNotificationConsoleApp
     {
         static void Main(string[] args)
         {
-
+            RallyRestApi rallyApi = new RallyRestApi("user@co.com", "secret", "https://sandbox.rallydev.com", "v2.0");
             Program program = new Program();
-            String projectRef = "/project/12352608219"; 
+            String projectRef = "/project/12352608219"; //Company X
             String aUTCdateString = "2015-04-08";
-
-            DateTime start = DateTime.Now;
-            var p = program.GetArtifactNotificationForDateRange(aUTCdateString, DateTime.Now.ToString("o"), projectRef);
-            DateTime finish = DateTime.Now;
-            Console.WriteLine(string.Format("{0}", finish.Subtract(start)));
+            while (true)
+            {
+                
+                Console.WriteLine("===============");
+                DateTime start = DateTime.Now;
+                var p = program.GetArtifactNotificationForDateRange(rallyApi, aUTCdateString, DateTime.Now.ToString("o"), projectRef);
+                DateTime finish = DateTime.Now;
+                Console.WriteLine(string.Format("{0}", finish.Subtract(start)));
+                Thread.Sleep(5000);
+            }
         }
-        public List<dynamic> GetArtifactNotificationForDateRange(string LastItemDateStamp, string currentRunTime, string projectRef)
+        public List<dynamic> GetArtifactNotificationForDateRange(RallyRestApi rallyApi, string LastItemDateStamp, string currentRunTime, string projectRef)
         {
             List<dynamic> returnValue;
-            RallyRestApi rallyApi = new RallyRestApi("user@co.com", "secret", "https://rally1.rallydev.com", "v2.0");
             Request request = new Request("artifactnotification");
             request.Project = projectRef;
-            request.PageSize = 200;
-            request.Limit = 1000;
+            //request.PageSize = 200;
+            request.Limit = 5000;
+            request.Fetch = new List<string>() { "IDPrefix", "ID"};
             request.Query = new Query("CreationDate", Query.Operator.GreaterThan, LastItemDateStamp).And(new Query("CreationDate", Query.Operator.LessThanOrEqualTo, currentRunTime));
             try
             {
-
                 QueryResult qr = rallyApi.Query(request);
                 var results = qr.Results;
-                returnValue = results.ToList();
-
-                while (results.Count() == 200)
+                foreach (var r in results)
                 {
-                    request.Start = returnValue.Count + 1;
-                    results = rallyApi.Query(request).Results;
-                    returnValue.AddRange(results);
+                    Console.WriteLine(r["IDPrefix"] + r["ID"]);
                 }
+                returnValue = results.ToList();
+                return returnValue;
             }
             catch (Exception)
             {
                 throw;
-            }
-            
-            return returnValue;
+            } 
         }
     }
 }
