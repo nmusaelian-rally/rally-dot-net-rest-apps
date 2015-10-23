@@ -14,14 +14,6 @@ Also, TestCaseResult object in [WS API object model](https://rally1.rallydev.com
 Work items such as UserStory(HierarchicalRequirement), Defect, TestCase inherit Project attribute from Artifact abstract type.
 It means that scoping Attachment request to a project will not include attachments that belong to TestCaseResults.
 
-This screenshot shows the console output if a TestCaseResult scenario is not taken into account when one of the query results is an attachment that belongs to a TCR
-
-![](pic0.png)
-
-This screenshot shows the console output after the code is fixed. Note that one of the query results belongs to a TCR:
-
-![](pic1.png)
-
 ## License
 These code examples are  available AS IS, for illustration purposes only. They are NOT supported by Rally.
 AppTemplate is released under the MIT license.  See the file [LICENSE](./LICENSE) for the full text.
