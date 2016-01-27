@@ -7,11 +7,11 @@ and tested with 3.0.1 dll
 
 The code is authenticated with [ApiKey](https://help.rallydev.com/rally-application-manager) 
 
-![](pic1.png)
+![](pic3.png)
 
 Success:
 
-![](pic2.png)
+![](pic4.png)
 
 ## License
 These code examples are  available AS IS, for illustration purposes only. They are NOT supported by Rally.
